@@ -15,12 +15,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # - name: Sonarqube begin
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-      #     shell: powershell
-      #   run: |
-      #     D:\sonarScanner\SonarScanner.MSBuild.exe begin /k:"GihubAction" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
+      - name: Sonarqube begin
+         env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+           shell: powershell
+         run: |
+           D:\sonarScanner\SonarScanner.MSBuild.exe begin /k:"GihubAction" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
+     
       - name: Setup MSBuild path
         uses: microsoft/setup-msbuild@v1.0.2
         env:
@@ -40,25 +41,25 @@ jobs:
 
  
 
-      # - name: Publish to folder
-      #   run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
+      - name: Publish to folder
+        run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
 
  
 
-      # - name: Sonarqube build
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-      #     shell: powershell
-      #   run: |
-      #     MSBuild.exe build WebApplication1.sln
-      #     D:\sonarScanner\SonarScanner.MSBuild.exe end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+      - name: Sonarqube build
+        env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+           shell: powershell
+         run: |
+           MSBuild.exe build WebApplication1.sln
+           D:\sonarScanner\SonarScanner.MSBuild.exe end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
-      # - name: Sonarqube End
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-      #     shell: powershell
-      #   run: 
-      #     D:\sonarScanner\SonarScanner.MSBuild.exe end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+      - name: Sonarqube End
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          shell: powershell
+          run: 
+          D:\sonarScanner\SonarScanner.MSBuild.exe end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
