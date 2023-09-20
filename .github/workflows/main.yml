@@ -52,8 +52,8 @@ jobs:
            shell: powershell
         run: |
            MSBuild.exe build WebApplication1.sln
-           D:\sonarScanner\SonarScanner.MSBuild.exe end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
+           
       - name: Sonarqube End
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
