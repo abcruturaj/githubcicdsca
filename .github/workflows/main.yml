@@ -16,10 +16,10 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Sonarqube begin
-         env:
+        env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
            shell: powershell
-         run: |
+        run: |
            D:\sonarScanner\SonarScanner.MSBuild.exe begin /k:"GihubAction" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
      
       - name: Setup MSBuild path
@@ -50,7 +50,7 @@ jobs:
         env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
            shell: powershell
-         run: |
+        run: |
            MSBuild.exe build WebApplication1.sln
            D:\sonarScanner\SonarScanner.MSBuild.exe end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
@@ -58,8 +58,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           shell: powershell
-          run: 
-          D:\sonarScanner\SonarScanner.MSBuild.exe end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+        run: 
+           D:\sonarScanner\SonarScanner.MSBuild.exe end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
