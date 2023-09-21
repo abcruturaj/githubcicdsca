@@ -53,9 +53,8 @@ jobs:
            shell: powershell
         run: 
            # D:\sonarScanner\SonarScanner.MSBuild.exe build
-           D:\sonarScanner\SonarScanner.MSBuild.exe build WebApplication1.sln
-           D:\sonarScanner\SonarScanner.MSBuild.exe end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-
+           MSBuild.exe WebApplication1.sln
+           
 
            
       - name: Sonarqube End
