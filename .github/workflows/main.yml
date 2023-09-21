@@ -52,7 +52,7 @@ jobs:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
            shell: powershell
         run: 
-           D:\sonarScanner\SonarScanner.MSBuild.exe 
+           D:\sonarScanner\SonarScanner.MSBuild.exe build
 
 
            
