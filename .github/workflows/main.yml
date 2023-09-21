@@ -19,11 +19,12 @@ jobs:
         env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
            shell: powershell
-        run: |
+        run: 
            D:\sonarScanner\SonarScanner.MSBuild.exe begin /k:"GihubAction" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
      
       - name: Setup MSBuild path
         uses: microsoft/setup-msbuild@v1.0.2
+          with:msbuild-version:'15.0'
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
@@ -41,8 +42,9 @@ jobs:
 
  
 
-      # - name: Publish to folder
-      #   run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
+      - name: Publish to folder
+        # run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
+        run: msbuild /t:Build /p:Configuration=Release WebApplication1.sln
 
  
 
@@ -50,8 +52,9 @@ jobs:
         env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
            shell: powershell
-        run: |
-           MSBuild.exe build D:\githubactioncicdSCA\githubactioncicddemosca\WebApplication1\WebApplication1.sln
+        run: 
+           D:\sonarScanner\SonarScanner.MSBuild.exe 
+
 
            
       - name: Sonarqube End
