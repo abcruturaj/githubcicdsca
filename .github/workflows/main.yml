@@ -51,7 +51,7 @@ jobs:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
            shell: powershell
         run: |
-           MSBuild.exe build WebApplication1.csproj
+           MSBuild.exe build D:\githubactioncicdSCA\githubactioncicddemosca\WebApplication1\WebApplication1.sln
 
            
       - name: Sonarqube End
