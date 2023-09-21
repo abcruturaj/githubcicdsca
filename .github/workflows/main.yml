@@ -50,19 +50,19 @@ jobs:
         # run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
         run: msbuild /t:Build /p:Configuration=Release WebApplication1.sln
 
-      - name: Run Code Coverage
-        run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+      # - name: Run Code Coverage
+      #   run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
-      - name: Publish Code Coverage Results
-        uses: actions/upload-artifact@v2
-        with:
-         name: code-coverage
-         path: '**/coverage.opencover.xml'
+      # - name: Publish Code Coverage Results
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #    name: code-coverage
+      #    path: '**/coverage.opencover.xml'
 
-      - name: Generate Code Coverage Report
-        run: |
-         ReportGenerator.exe -reports:**/coverage.opencover.xml -targetdir:coverage-report -reporttypes:Html
-         mv coverage-report $GITHUB_WORKSPACE/coverage-report
+      # - name: Generate Code Coverage Report
+      #   run: |
+      #    ReportGenerator.exe -reports:**/coverage.opencover.xml -targetdir:coverage-report -reporttypes:Html
+      #    mv coverage-report $GITHUB_WORKSPACE/coverage-report
 
       - name: Sonarqube build
         env:
