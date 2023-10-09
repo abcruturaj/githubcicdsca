@@ -21,9 +21,9 @@ jobs:
       #     dotnet-version: 4.6.1
       
       - name: Sonarqube begin
-        env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-           shell: powershell
+        # env:
+        #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        #    shell: powershell
         run: 
            D:\sonarScanner\SonarScanner.MSBuild.exe begin /k:"GihubAction" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
      
@@ -65,9 +65,9 @@ jobs:
       #    mv coverage-report $GITHUB_WORKSPACE/coverage-report
 
       - name: Sonarqube build
-        env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-           shell: powershell
+        # env:
+        #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        #    shell: powershell
         run: 
            # D:\sonarScanner\SonarScanner.MSBuild.exe build
            MSBuild.exe WebApplication1.sln
@@ -75,9 +75,9 @@ jobs:
 
            
       - name: Sonarqube End
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          shell: powershell
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        #   shell: powershell
         run: 
            D:\sonarScanner\SonarScanner.MSBuild.exe end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
